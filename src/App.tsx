@@ -26,7 +26,6 @@ const App: React.FC = () => {
 
     useEffect(() => {
 
-        console.log(import.meta.env.USER_NAME);
 
         const fetchWeather = async () => {
             try {
@@ -58,19 +57,22 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-row items-center justify-around h-screen w-screen bg-black text-white">
+        <div className="flex flex-row items-center justify-around h-screen w-screen bg-black text-white overflow-y-hidden"
+             style={{ maxHeight: '100vh' }}
+        >
             <div className="w-1/2 flex justify-center items-center">
-                <img src="logo-company.png" alt="Company Logo" className="w-full max-w-4xl"/>
+                <img src="logo-company.png" alt="Company Logo" className="w-full max-w-xl"/>
             </div>
             <div className="w-1/2 flex flex-col justify-center items-center text-center">
                 {countdown > 0 && <p className="text-6xl md:text-7xl lg:text-7xl mb-6 antialiased">The course walk ends in:</p>}
-                <h1 style={{ fontSize: countdown > 0 ? '13rem' : '6rem' }}>
+                <h1 style={{ fontSize: countdown > 0 ? '13rem' : '4rem' }}>
                     {countdown > 0 ? `${Math.floor(countdown / 60)}:${('0' + countdown % 60).slice(-2)}` : message}
                 </h1>
-                <p className="text-8xl md:text-9xl lg:text-9xl text-blue-500 antialiased">
-                    {weather.temp}°C / {weather.tempF}°F  <img src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
-                                                               alt="Weather Icon"
-                                                               className="inline h-48 w-48 "/>
+                <p className="text-8xl md:text-9xl lg:text-9xl text-blue-500 antialiased" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
+                    {weather.temp}°C / {weather.tempF}°F
+                    <img src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
+                         alt="Weather Icon"
+                         className="inline h-48 w-48 "/>
                 </p>
             </div>
             <button className="fixed bottom-5 right-5 py-1 px-3 bg-green-700 text-white rounded-lg hover:bg-green-600"
